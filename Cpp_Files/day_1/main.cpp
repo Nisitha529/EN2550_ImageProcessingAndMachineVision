@@ -6,49 +6,44 @@
 
 // int main(int, char**) {
 //     cout << "Hello, wrld!\n";
-//     Mat img = imread("E:\\MOODLE\\SEMESTER 4\\EN2550-Image_Vision\\Excercises\\EN2550_ImageProcessingAndMachineVision\\Cpp_Files\\day_1\\images\tom_dark.jpg",0);
-//     if (img.data){
-//             namedWindow("Display Image",WINDOW_AUTOSIZE);
-//             imshow("Image",img);
-//             waitKey(0);
-//     }
+//     //Mat img = imread("E:/MOODLE/SEMESTER 4/EN2550-Image_Vision/Excercises/EN2550_ImageProcessingAndMachineVision/Cpp_Files/day_1/images/tom_dark.jpg",0);
+//     // if (img.data){
+//     //         namedWindow("Display Image",WINDOW_AUTOSIZE);
+//     //         imshow("Image",img);
+//     //         waitKey(0);
+//     // }
 //     cout << "Hello, world!\n";
 //     return 0;
 // }
 
-#include <iostream>                        // std::cout
-#include <opencv2/core/core.hpp>           // cv::Mat
-#include <opencv2/imgcodecs/imgcodecs.hpp>     // cv::imread()
-#include <opencv2/imgproc/imgproc.hpp>     // cv::Canny()
-using namespace std;
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
 using namespace cv;
-void help()
+using namespace std;
+
+int main(int argc, char** argv)
 {
-    cout
-        << "----------------------------------------------------" << endl
-        << "This is a test program for the Image Watch Debugger " << endl
-        << "plug-in for Visual Studio. The program loads an     " << endl
-        << "image from a file and runs the Canny edge detector. " << endl
-        << "No output is displayed or written to disk."
-        << endl
-        << "Usage:"                                               << endl
-        << "image-watch-demo inputimage"                          << endl
-        << "----------------------------------------------------" << endl
-        << endl;
-}
-int main(int argc, char *argv[])
-{
-    help();
-    if (argc != 2)
-    {
-        cout << "Wrong number of parameters" << endl;
-        return -1;
-    }
-    cout << "Loading input image: " << argv[1] << endl;
-    Mat input;
-    input = imread(argv[1], IMREAD_COLOR);
-    cout << "Detecting edges in input image" << endl;
-    Mat edges;
-    Canny(input, edges, 10, 100);
-    return 0;
+ // Read the image file
+ Mat image = imread("E:/MOODLE/SEMESTER 4/EN2550-Image_Vision/Excercises/EN2550_ImageProcessingAndMachineVision/Cpp_Files/day_1/images/tom_dark.jpg");
+
+ // Check for failure
+ if (image.empty()) 
+ {
+  cout << "Could not open or find the image" << endl;
+  cin.get(); //wait for any key press
+  return -1;
+ }
+cout << "Could open or find the image" << endl;
+ String windowName = "The Guitar"; //Name of the window
+
+ namedWindow(windowName); // Create a window
+
+ imshow(windowName, image); // Show our image inside the created window.
+
+ waitKey(0); // Wait for any keystroke in the window
+
+ destroyWindow(windowName); //destroy the created window
+
+ return 0;
 }
